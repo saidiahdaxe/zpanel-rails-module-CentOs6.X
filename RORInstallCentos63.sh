@@ -96,18 +96,30 @@ gem list
 passenger-install-apache2-module --auto
 
 
-# Run new Passenger connection...[A verifié: voir doc passenger]
+# Run new Passenger connection...
 
-# Now we need to do a few config changes (this will be done by the zppy package!)
-#
-#   LoadModule passenger_module /usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.4/libout/apache2/mod_passenger.so
-#   PassengerRoot /usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.4
-#   PassengerDefaultRuby /usr/local/bin/ruby
+#######################################################################
+# Activation of Passenger Module    	      						  #
+#######################################################################
+
+
+#Adding Passenger_Module to httpd.conf file
+##
+echo "##Passenger Module Definition
+      LoadModule passenger_module /usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.4/libout/apache2/mod_passenger.so
+      PassengerRoot /usr/local/lib/ruby/gems/1.9.1/gems/passenger-4.0.4
+      PassengerDefaultRuby /usr/local/bin/ruby " >> /etc/httpd/conf/httpd.conf
+#Activation of Passenger Module (passenger_module)
+##
+service httpd restart
+service httpd reload
 
 
 #Suppose you have a Rails application in /somewhere. Add a virtual host to your
 #Apache configuration file and set its DocumentRoot to /somewhere/public:
-#
+########
+##to be automated by Zpanel Module
+########
 # <VirtualHost *:80>
 #      ServerName www.yourhost.com
 #      # !!! Be sure to point DocumentRoot to 'public'!
